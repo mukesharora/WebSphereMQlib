@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSphereLib.Messages", "WebSphereLib.Messages\WebSphereLib.Messages.csproj", "{D2188348-4099-4968-B1C9-3AB17E7BEB1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSphereLib.Test", "WebSphereLib.Test\WebSphereLib.Test.csproj", "{96401E16-B74E-4379-8B6F-48C04E4C7785}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSphereLib.App", "WebSphereLib.App\WebSphereLib.App.csproj", "{44479E03-B676-4A60-B670-014C61993A93}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://192.168.10.26:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = WebSphereLib.App\\WebSphereLib.App.csproj
+		SccProjectName1 = WebSphereLib.App
+		SccLocalPath1 = WebSphereLib.App
+		SccProjectUniqueName2 = WebSphereLib.Messages\\WebSphereLib.Messages.csproj
+		SccProjectName2 = WebSphereLib.Messages
+		SccLocalPath2 = WebSphereLib.Messages
+		SccProjectUniqueName3 = WebSphereLib.Test\\WebSphereLib.Test.csproj
+		SccProjectName3 = WebSphereLib.Test
+		SccLocalPath3 = WebSphereLib.Test
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2188348-4099-4968-B1C9-3AB17E7BEB1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2188348-4099-4968-B1C9-3AB17E7BEB1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2188348-4099-4968-B1C9-3AB17E7BEB1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2188348-4099-4968-B1C9-3AB17E7BEB1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96401E16-B74E-4379-8B6F-48C04E4C7785}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96401E16-B74E-4379-8B6F-48C04E4C7785}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96401E16-B74E-4379-8B6F-48C04E4C7785}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96401E16-B74E-4379-8B6F-48C04E4C7785}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44479E03-B676-4A60-B670-014C61993A93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44479E03-B676-4A60-B670-014C61993A93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44479E03-B676-4A60-B670-014C61993A93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44479E03-B676-4A60-B670-014C61993A93}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
