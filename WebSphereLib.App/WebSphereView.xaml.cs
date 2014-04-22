@@ -101,6 +101,9 @@ namespace WebSphereLib.App
             else
             {
                 MessageBox.Show("Network is unavailable", "Information");
+
+                this._isMQConnected = false;
+
                 this.Dispatcher.Invoke(new Action(() =>
                 {
                     this.btnSendMessage.IsEnabled = false;
