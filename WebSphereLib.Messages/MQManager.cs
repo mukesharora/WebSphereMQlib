@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using IBM.WMQ;
+using System.Collections;
 
 namespace WebSphereLib.Messages
 {
@@ -11,11 +12,12 @@ namespace WebSphereLib.Messages
     /// </summary>
     public class MQManager
     {
-        MQQueueManager queueManager;
-        MQQueue queue;
-        MQMessage queueMessage;
-        MQPutMessageOptions queuePutMessageOptions;
-        MQGetMessageOptions queueGetMessageOptions;
+        private MQQueueManager queueManager;
+        private MQQueue queue;
+        private MQMessage queueMessage;
+        private MQPutMessageOptions queuePutMessageOptions;
+        private MQGetMessageOptions queueGetMessageOptions;
+        private Hashtable queueProperties;
 
         static string SendQueueName;
         static string ReceiveQueueName;
@@ -28,33 +30,29 @@ namespace WebSphereLib.Messages
 
         public MQManager()
         {
+            queueProperties = new Hashtable();
         }
-       
+
         /// <summary>
         /// Connect to MQ Server
         /// </summary>
         /// <param name="strQueueManagerName">Queue Manager Name</param>
         /// <param name="strChannelInfo">Channel Information</param>
         /// <returns></returns>
-        public MQMessageStatus ConnectMQ(string strQueueManagerName, string strChannelInfo)
+        public MQMessageStatus ConnectMQ(string strQueueManagerName, string strChannelName, string strHostName, string port, string userName, string password)
         {
-            MQMessageStatus messageStatus = new MQMessageStatus();
-            QueueManagerName = strQueueManagerName;
-            ChannelInfo = strChannelInfo;
-
-            char[] separator = { '/' };
-            string[] ChannelParams;
-            ChannelParams = ChannelInfo.Split(separator);
-            channelName = ChannelParams[0];
-            transportType = ChannelParams[1];
-            connectionName = ChannelParams[2];
+            MQMessageStatus messageStatus = new MQMessageStatus();            
             string strReturn = string.Empty;
+
+            queueProperties[MQC.HOST_NAME_PROPERTY] = strHostName;
+            queueProperties[MQC.PORT_PROPERTY] = int.Parse(port);
+            queueProperties[MQC.CHANNEL_PROPERTY] = strChannelName;
+            queueProperties[MQC.USER_ID_PROPERTY] = userName;
+            queueProperties[MQC.PASSWORD_PROPERTY] = password;
 
             try
             {
-                queueManager = new MQQueueManager(QueueManagerName,
-                   channelName, connectionName);
-
+                queueManager = new MQQueueManager(QueueManagerName, queueProperties);
                 messageStatus.Message = "Connected Successfully";
                 messageStatus.Status = true;
             }

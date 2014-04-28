@@ -33,7 +33,7 @@
                     <TextBox Grid.Column="1" Grid.Row="0" Name="txtQueueManager" Margin="5"></TextBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="1" Text="Channel Info:" Margin="5"></TextBlock>
-                    <TextBox Grid.Column="1" Grid.Row="1" Name="txtChannelInfo" Margin="5"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="1" IsReadOnly="True" Name="txtChannelInfo" Margin="5"></TextBox>
 
                     <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Name="btnConnect" Click="btnConnect_Click" Content="Connect" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,10,5,10"></Button>
 

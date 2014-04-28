@@ -58,20 +58,21 @@ namespace WebSphereLibTest.Test
             string strChannelInfo = string.Empty;
             string getQueueName = string.Empty;
             string putQueueName = string.Empty;
-            string putText = string.Empty;            
+            string putText = string.Empty;       
+            
 
-            strQueueManagerName = "queuemanager";
-            strQueueName = "omniIdQueue";
-            strChannelInfo = "SYSTEM.ADMIN.SVRCONN/TCP/192.168.10.221(1414)";
-            getQueueName = "omniIdQueue";
-            putQueueName = "omniIdQueue";
-            putText = xmlPartDeliveredMessage;
+            //strQueueManagerName = "queuemanager";
+            //strQueueName = "omniIdQueue";
+            //strChannelInfo = "SYSTEM.ADMIN.SVRCONN/TCP/192.168.10.221(1414)";
+            //getQueueName = "omniIdQueue";
+            //putQueueName = "omniIdQueue";
+            //putText = xmlPartDeliveredMessage;
 
-            var connectStatus = myMQ.ConnectMQ(strQueueManagerName, strChannelInfo);
+            //var connectStatus = myMQ.ConnectMQ(strQueueManagerName, strChannelInfo);
 
 
-            var writeStatus = myMQ.WriteLocalQMsg(putText, putQueueName);
-            var getStatus = myMQ.ReadLocalQMsg(getQueueName);
+            //var writeStatus = myMQ.WriteLocalQMsg(putText, putQueueName);
+            //var getStatus = myMQ.ReadLocalQMsg(getQueueName);
 
         }
     }

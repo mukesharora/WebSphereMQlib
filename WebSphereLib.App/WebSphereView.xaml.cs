@@ -40,6 +40,12 @@ namespace WebSphereLib.App
         private MQManager _manager = new MQManager();
         private long _uniqueId = 1;
         private bool _isMQConnected = false;
+        private string _userName = string.Empty;
+        private string _password = string.Empty;
+        private string _hostName = string.Empty;
+        private string _port = string.Empty;
+        private string _channelName = string.Empty;
+        private string _protocolName = string.Empty;
 
         #endregion
 
@@ -49,9 +55,15 @@ namespace WebSphereLib.App
         {
             InitializeComponent();
             _strQueueManagerName = ConfigurationManager.AppSettings.Get("QueueManager");
-            _strChannelInfo = string.Format("{0}/{1}/{2}", ConfigurationManager.AppSettings.Get("ChannelName"), ConfigurationManager.AppSettings.Get("ProtocolName"), ConfigurationManager.AppSettings.Get("ConnectionName"));
+            _channelName = ConfigurationManager.AppSettings.Get("ChannelName");
+            _protocolName = ConfigurationManager.AppSettings.Get("ProtocolName");
+            _hostName = ConfigurationManager.AppSettings.Get("HostName");
+            _port = ConfigurationManager.AppSettings.Get("Port");
             _getQueueName = ConfigurationManager.AppSettings.Get("GetQueueName");
             _putQueueName = ConfigurationManager.AppSettings.Get("PutQueueName");
+            _userName = ConfigurationManager.AppSettings.Get("Username");
+            _password = ConfigurationManager.AppSettings.Get("Password");
+            _strChannelInfo = string.Format("{0}/{1}/{2}({3})", _channelName, _protocolName, _hostName, _port);
             this.DataContext = this;
             this._queueDataList = new ObservableCollection<QueueData>();
             //Checks for Network availability
@@ -275,7 +287,7 @@ namespace WebSphereLib.App
 
         private void btnConnect_Click(object sender, RoutedEventArgs e)
         {
-            MQMessageStatus connectStatus = _manager.ConnectMQ(this.txtQueueManager.Text.Trim(), this.txtChannelInfo.Text.Trim());
+            MQMessageStatus connectStatus = _manager.ConnectMQ(this.txtQueueManager.Text.Trim(), _channelName, _hostName, _port, _userName, _password);
 
             if (connectStatus.Status)
             {
