@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntryLoadArea.cs" />
+    <Compile Include="ExitLoadArea.cs" />
     <Compile Include="MQManager.cs" />
     <Compile Include="PartDeliveredMessage.cs" />
     <Compile Include="PartReorderMessage.cs" />

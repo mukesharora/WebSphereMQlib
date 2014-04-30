@@ -159,7 +159,7 @@ namespace WebSphereLib.App
 
                 messageToSend = this.SerializeObject<PartDeliveredMessage>(partDeliveredMessage);
             }
-            else
+            else if (this.radioPartReorder.IsChecked.HasValue && this.radioPartReorder.IsChecked.Value)
             {
                 PartReorderMessage partReorderMessage = new PartReorderMessage();
                 partReorderMessage.MessageType = (MessageType)Enum.Parse(typeof(MessageType), Convert.ToString(this.comboMessageTypePartReorder.Text), true);
@@ -170,6 +170,33 @@ namespace WebSphereLib.App
 
                 messageToSend = this.SerializeObject<PartReorderMessage>(partReorderMessage);
             }
+            else if (this.radioEntryLoad.IsChecked.HasValue && this.radioEntryLoad.IsChecked.Value)
+            {
+                EntryLoadArea entryLoadAreaMessage = new EntryLoadArea();
+                entryLoadAreaMessage.RFIDDeviceAddress = this.txtRFIDDeviceAddressEntryLoad.Text.Trim();
+                entryLoadAreaMessage.RFIDDeviceAntennaID = this.txtRFIDDeviceAntennaIDEntryLoad.Text.Trim();
+                entryLoadAreaMessage.RFIDDeviceID = this.txtRFIDDeviceIDEntryLoad.Text.Trim();
+                entryLoadAreaMessage.RFIDTagEPC = this.txtRFIDTagEPCEntryLoad.Text.Trim();
+                entryLoadAreaMessage.PartNumber = this.txtPartNumberEntryLoad.Text.Trim();
+                entryLoadAreaMessage.TimeStamp = DateTime.Parse(this.txtTimestampEntryLoad.Text.Trim());
+                entryLoadAreaMessage.UID = int.Parse(this.txtUniqueIdEntryLoad.Text.Trim());
+
+                messageToSend = this.SerializeObject<EntryLoadArea>(entryLoadAreaMessage);
+            }
+            else if (this.radioExitLoad.IsChecked.HasValue && this.radioExitLoad.IsChecked.Value)
+            {
+                ExitLoadArea exitLoadAreaMessage = new ExitLoadArea();
+                exitLoadAreaMessage.RFIDDeviceAddress = this.txtRFIDDeviceAddressExitLoad.Text.Trim();
+                exitLoadAreaMessage.RFIDDeviceAntennaID = this.txtRFIDDeviceAntennaIDExitLoad.Text.Trim();
+                exitLoadAreaMessage.RFIDDeviceID = this.txtRFIDDeviceIDExitLoad.Text.Trim();
+                exitLoadAreaMessage.RFIDTagEPC = this.txtRFIDTagEPCExitLoad.Text.Trim();
+                exitLoadAreaMessage.PartNumber = this.txtPartNumberExitLoad.Text.Trim();
+                exitLoadAreaMessage.TimeStamp = DateTime.Parse(this.txtTimestampExitLoad.Text.Trim());
+                exitLoadAreaMessage.UID = int.Parse(this.txtUniqueIdExitLoad.Text.Trim());
+
+                messageToSend = this.SerializeObject<ExitLoadArea>(exitLoadAreaMessage);
+            }
+
 
             if (!string.IsNullOrWhiteSpace(messageToSend))
             {
@@ -184,6 +211,8 @@ namespace WebSphereLib.App
                     this._uniqueId = this._uniqueId + 1;
                     this.txtUniqueIdPartDelivered.Text = this._uniqueId.ToString();
                     this.txtUniqueIdPartReorder.Text = this._uniqueId.ToString();
+                    this.txtUniqueIdEntryLoad.Text = this._uniqueId.ToString();
+                    this.txtUniqueIdExitLoad.Text = this._uniqueId.ToString();
                     //this.btnRetrieveMessage.IsEnabled = true;
                 }
                 else
@@ -214,8 +243,20 @@ namespace WebSphereLib.App
             this.comboColorPartDelivered.SelectedIndex = 0;
             this.comboMessageTypePartReorder.SelectedIndex = 0;
             this.comboColorPartReorder.SelectedIndex = 0;
+            this.txtRFIDDeviceAddressEntryLoad.Text = string.Empty;
+            this.txtRFIDDeviceAntennaIDEntryLoad.Text = string.Empty;
+            this.txtRFIDDeviceIDEntryLoad.Text = string.Empty;
+            this.txtRFIDTagEPCEntryLoad.Text = string.Empty;
+            this.txtPartNumberEntryLoad.Text = string.Empty;
+            this.txtRFIDDeviceAddressExitLoad.Text = string.Empty;
+            this.txtRFIDDeviceAntennaIDExitLoad.Text = string.Empty;
+            this.txtRFIDDeviceIDExitLoad.Text = string.Empty;
+            this.txtRFIDTagEPCExitLoad.Text = string.Empty;
+            this.txtPartNumberExitLoad.Text = string.Empty;
             this.txtTimestampPartDelivered.Text = DateTime.Now.ToString();
             this.txtTimestampPartReorder.Text = DateTime.Now.ToString();
+            this.txtTimestampEntryLoad.Text = DateTime.Now.ToString();
+            this.txtTimestampExitLoad.Text = DateTime.Now.ToString();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -227,10 +268,14 @@ namespace WebSphereLib.App
             this.radioPartDelievered.IsChecked = true;
             this.txtTimestampPartDelivered.Text = DateTime.Now.ToString();
             this.txtTimestampPartReorder.Text = DateTime.Now.ToString();
+            this.txtTimestampEntryLoad.Text = DateTime.Now.ToString();
+            this.txtTimestampExitLoad.Text = DateTime.Now.ToString();
             this.txtUniqueIdPartDelivered.Text = this._uniqueId.ToString();
             this.txtUniqueIdPartReorder.Text = this._uniqueId.ToString();
+            this.txtUniqueIdEntryLoad.Text = this._uniqueId.ToString();
+            this.txtUniqueIdExitLoad.Text = this._uniqueId.ToString();
             this.btnSendMessage.IsEnabled = false;
-            this.btnRetrieveMessage.IsEnabled = false;
+            this.btnRetrieveMessage.IsEnabled = false;            
         }
 
         private void radioPartDelievered_Checked(object sender, RoutedEventArgs e)
@@ -245,18 +290,26 @@ namespace WebSphereLib.App
                 {
                     this.partReorderGrid.Visibility = Visibility.Collapsed;
                 }
-            }
-            else
-            {
-                if (this.partDeliveredGrid != null)
+                if (this.entryLoadGrid != null)
                 {
-                    this.partDeliveredGrid.Visibility = Visibility.Collapsed;
+                    this.entryLoadGrid.Visibility = Visibility.Collapsed;
                 }
-                if (this.partReorderGrid != null)
+                if (this.exitLoadGrid != null)
                 {
-                    this.partReorderGrid.Visibility = Visibility.Visible;
+                    this.exitLoadGrid.Visibility = Visibility.Collapsed;
                 }
             }
+            //else
+            //{
+            //    if (this.partDeliveredGrid != null)
+            //    {
+            //        this.partDeliveredGrid.Visibility = Visibility.Collapsed;
+            //    }
+            //    if (this.partReorderGrid != null)
+            //    {
+            //        this.partReorderGrid.Visibility = Visibility.Visible;
+            //    }
+            //}
         }
 
         private void radioPartReorder_Checked(object sender, RoutedEventArgs e)
@@ -271,8 +324,31 @@ namespace WebSphereLib.App
                 {
                     this.partDeliveredGrid.Visibility = Visibility.Collapsed;
                 }
+                if (this.entryLoadGrid != null)
+                {
+                    this.entryLoadGrid.Visibility = Visibility.Collapsed;
+                }
+                if (this.exitLoadGrid != null)
+                {
+                    this.exitLoadGrid.Visibility = Visibility.Collapsed;
+                }
             }
-            else
+            //else
+            //{
+            //    if (this.partReorderGrid != null)
+            //    {
+            //        this.partReorderGrid.Visibility = Visibility.Collapsed;
+            //    }
+            //    if (this.partDeliveredGrid != null)
+            //    {
+            //        this.partDeliveredGrid.Visibility = Visibility.Visible;
+            //    }
+            //}
+        }
+
+        private void radioEntryLoad_Checked(object sender, RoutedEventArgs e)
+        {
+            if (this.radioEntryLoad.IsChecked.HasValue && this.radioEntryLoad.IsChecked.Value)
             {
                 if (this.partReorderGrid != null)
                 {
@@ -280,7 +356,38 @@ namespace WebSphereLib.App
                 }
                 if (this.partDeliveredGrid != null)
                 {
-                    this.partDeliveredGrid.Visibility = Visibility.Visible;
+                    this.partDeliveredGrid.Visibility = Visibility.Collapsed;
+                }
+                if (this.entryLoadGrid != null)
+                {
+                    this.entryLoadGrid.Visibility = Visibility.Visible;
+                }
+                if (this.exitLoadGrid != null)
+                {
+                    this.exitLoadGrid.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
+        private void radioExitLoad_Checked(object sender, RoutedEventArgs e)
+        {
+            if (this.radioExitLoad.IsChecked.HasValue && this.radioExitLoad.IsChecked.Value)
+            {
+                if (this.partReorderGrid != null)
+                {
+                    this.partReorderGrid.Visibility = Visibility.Collapsed;
+                }
+                if (this.partDeliveredGrid != null)
+                {
+                    this.partDeliveredGrid.Visibility = Visibility.Collapsed;
+                }
+                if (this.entryLoadGrid != null)
+                {
+                    this.entryLoadGrid.Visibility = Visibility.Collapsed;
+                }
+                if (this.exitLoadGrid != null)
+                {
+                    this.exitLoadGrid.Visibility = Visibility.Visible;
                 }
             }
         }

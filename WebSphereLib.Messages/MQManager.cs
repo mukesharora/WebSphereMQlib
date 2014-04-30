@@ -20,12 +20,7 @@ namespace WebSphereLib.Messages
         private Hashtable queueProperties;
 
         static string SendQueueName;
-        static string ReceiveQueueName;
-        static string QueueManagerName;
-        static string ChannelInfo;
-        string channelName;
-        string transportType;
-        string connectionName;
+        static string ReceiveQueueName;       
         string message;
 
         public MQManager()
@@ -45,14 +40,14 @@ namespace WebSphereLib.Messages
             string strReturn = string.Empty;
 
             queueProperties[MQC.HOST_NAME_PROPERTY] = strHostName;
-            queueProperties[MQC.PORT_PROPERTY] = int.Parse(port);
+            queueProperties[MQC.PORT_PROPERTY] = port;
             queueProperties[MQC.CHANNEL_PROPERTY] = strChannelName;
             queueProperties[MQC.USER_ID_PROPERTY] = userName;
             queueProperties[MQC.PASSWORD_PROPERTY] = password;
 
             try
             {
-                queueManager = new MQQueueManager(QueueManagerName, queueProperties);
+                queueManager = new MQQueueManager(strQueueManagerName, queueProperties);
                 messageStatus.Message = "Connected Successfully";
                 messageStatus.Status = true;
             }
