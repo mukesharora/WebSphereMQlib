@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿//-----------------------------------------------------------------------
+//
+// <copyright file="DataView.xaml.cs" company="Omni-ID, Ltd.">
+//
+// Copyright (c) 2013, 2014 - Omni-ID, Ltd. All rights reserved.
+//
+// <author>Omni-ID</author>
+//
+// </copyright>
+//
+//-----------------------------------------------------------------------
+
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WebSphereLib.App
 {

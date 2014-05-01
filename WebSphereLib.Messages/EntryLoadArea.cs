@@ -1,7 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿//-----------------------------------------------------------------------
+//
+// <copyright file="EntryLoadArea.cs" company="Omni-ID, Ltd.">
+//
+// Copyright (c) 2013, 2014 - Omni-ID, Ltd. All rights reserved.
+//
+// <author>Omni-ID</author>
+//
+// </copyright>
+//
+//-----------------------------------------------------------------------
+
+using System;
 using System.Xml.Serialization;
 
 namespace WebSphereLib.Messages

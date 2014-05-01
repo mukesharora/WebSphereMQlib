@@ -1,26 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿//-----------------------------------------------------------------------
+//
+// <copyright file="WebSphereView.xaml.cs" company="Omni-ID, Ltd.">
+//
+// Copyright (c) 2013, 2014 - Omni-ID, Ltd. All rights reserved.
+//
+// <author>Omni-ID</author>
+//
+// </copyright>
+//
+//-----------------------------------------------------------------------
+
+using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Configuration;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xml;
-using System.Xml.Serialization;
-using WebSphereLib.Messages;
-using System.Collections.ObjectModel;
-using WebSphereLib.App.Entity;
-using System.ComponentModel;
-using System.Net.NetworkInformation;
-using System.Configuration;
 using System.Windows.Media.Effects;
 using System.Windows.Threading;
+using System.Xml;
+using System.Xml.Serialization;
+using WebSphereLib.App.Entity;
+using WebSphereLib.Messages;
 
 namespace WebSphereLib.App
 {
