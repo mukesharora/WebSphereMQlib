@@ -41,7 +41,10 @@ namespace WebSphereLib.App
         private string _putText = string.Empty;
         private ObservableCollection<QueueData> _queueDataList = null;
         private MQManager _manager = new MQManager();
-        private long _uniqueId = 1;
+        private long _uniqueIdPartDelivered = 1;
+        private long _uniqueIdPartOrdered = 1;
+        private long _uniqueIdEntryLoad = 1;
+        private long _uniqueIdExitLoad = 1;
         private bool _isMQConnected = false;
         private string _userName = string.Empty;
         private string _password = string.Empty;
@@ -161,6 +164,8 @@ namespace WebSphereLib.App
                 partDeliveredMessage.UID = int.Parse(this.txtUniqueIdPartDelivered.Text.Trim());
 
                 messageToSend = this.SerializeObject<PartDeliveredMessage>(partDeliveredMessage);
+                //Increment unique id on each message send
+                this._uniqueIdPartDelivered = this._uniqueIdPartDelivered + 1;
             }
             else if (this.radioPartReorder.IsChecked.HasValue && this.radioPartReorder.IsChecked.Value)
             {
@@ -172,6 +177,8 @@ namespace WebSphereLib.App
                 partReorderMessage.UID = int.Parse(this.txtUniqueIdPartReorder.Text.Trim());
 
                 messageToSend = this.SerializeObject<PartReorderMessage>(partReorderMessage);
+                //Increment unique id on each message send
+                this._uniqueIdPartOrdered = this._uniqueIdPartOrdered + 1;
             }
             else if (this.radioEntryLoad.IsChecked.HasValue && this.radioEntryLoad.IsChecked.Value)
             {
@@ -185,6 +192,8 @@ namespace WebSphereLib.App
                 entryLoadAreaMessage.UID = int.Parse(this.txtUniqueIdEntryLoad.Text.Trim());
 
                 messageToSend = this.SerializeObject<EntryLoadArea>(entryLoadAreaMessage);
+                //Increment unique id on each message send
+                this._uniqueIdEntryLoad = this._uniqueIdEntryLoad + 1;
             }
             else if (this.radioExitLoad.IsChecked.HasValue && this.radioExitLoad.IsChecked.Value)
             {
@@ -198,6 +207,8 @@ namespace WebSphereLib.App
                 exitLoadAreaMessage.UID = int.Parse(this.txtUniqueIdExitLoad.Text.Trim());
 
                 messageToSend = this.SerializeObject<ExitLoadArea>(exitLoadAreaMessage);
+                //Increment unique id on each message send
+                this._uniqueIdExitLoad = this._uniqueIdExitLoad + 1;
             }
 
 
@@ -210,12 +221,11 @@ namespace WebSphereLib.App
                     MessageBox.Show(messageStatus.Message, "Information");
                     //Clear the existing data from the fields
                     this.ClearFields();
-                    //Increment unique id on each message send
-                    this._uniqueId = this._uniqueId + 1;
-                    this.txtUniqueIdPartDelivered.Text = this._uniqueId.ToString();
-                    this.txtUniqueIdPartReorder.Text = this._uniqueId.ToString();
-                    this.txtUniqueIdEntryLoad.Text = this._uniqueId.ToString();
-                    this.txtUniqueIdExitLoad.Text = this._uniqueId.ToString();
+
+                    this.txtUniqueIdPartDelivered.Text = this._uniqueIdPartDelivered.ToString();
+                    this.txtUniqueIdPartReorder.Text = this._uniqueIdPartOrdered.ToString();
+                    this.txtUniqueIdEntryLoad.Text = this._uniqueIdEntryLoad.ToString();
+                    this.txtUniqueIdExitLoad.Text = this._uniqueIdExitLoad.ToString();
                     //this.btnRetrieveMessage.IsEnabled = true;
                 }
                 else
@@ -273,12 +283,12 @@ namespace WebSphereLib.App
             this.txtTimestampPartReorder.Text = DateTime.Now.ToString();
             this.txtTimestampEntryLoad.Text = DateTime.Now.ToString();
             this.txtTimestampExitLoad.Text = DateTime.Now.ToString();
-            this.txtUniqueIdPartDelivered.Text = this._uniqueId.ToString();
-            this.txtUniqueIdPartReorder.Text = this._uniqueId.ToString();
-            this.txtUniqueIdEntryLoad.Text = this._uniqueId.ToString();
-            this.txtUniqueIdExitLoad.Text = this._uniqueId.ToString();
+            this.txtUniqueIdPartDelivered.Text = this._uniqueIdPartDelivered.ToString();
+            this.txtUniqueIdPartReorder.Text = this._uniqueIdPartDelivered.ToString();
+            this.txtUniqueIdEntryLoad.Text = this._uniqueIdPartDelivered.ToString();
+            this.txtUniqueIdExitLoad.Text = this._uniqueIdPartDelivered.ToString();
             this.btnSendMessage.IsEnabled = false;
-            this.btnRetrieveMessage.IsEnabled = false;            
+            this.btnRetrieveMessage.IsEnabled = false;
         }
 
         private void radioPartDelievered_Checked(object sender, RoutedEventArgs e)
